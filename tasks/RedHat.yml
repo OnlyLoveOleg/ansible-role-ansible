@@ -1,0 +1,52 @@
+---
+- name: RedHat | install packages
+  yum:
+   name={{item}}
+   state=latest
+  with_items:
+   - git
+   - gcc
+   - python-setuptools
+   - python-devel
+
+- name: RedHat | easy_install - Install pip
+  easy_install: >
+   name=pip
+
+- name: RedHat | pip - Install Packages
+  pip: >
+   name={{item}}
+   state=latest
+  with_items:
+   - paramiko
+   - PyYAML
+   - Jinja2
+   - httplib2
+   - simplejson
+   - six
+   - redis
+
+- name: RedHat | Clone Ansible from github.com
+  git: >
+   repo=https://github.com/ansible/ansible.git
+   recursive=yes
+   dest={{ansible_inst.dir}}
+   accept_hostkey=yes
+   update=no
+
+- name: RedHat | Add Ansible env-setup hack system wide
+  template: >
+   src=ansible-env-setup.j2
+   dest=/etc/profile.d/ansible-env-setup.sh
+   owner=root group=root mode=0755
+  when: ansible_inst.add_evn_setup_hack_sys_wide
+
+- name: RedHat | make sure /etc/ansible exist
+  file: >
+   path=/etc/ansible
+   state=directory
+
+- name: RedHat | Copy ansible.cfg configuration file
+  template: >
+   src={{ ansible_cfg }}
+   dest=/etc/ansible/ansible.cfg
