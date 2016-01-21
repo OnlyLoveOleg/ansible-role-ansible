@@ -1,7 +1,7 @@
 Ansible
 =========
 
-Role to install Ansible from git clone and manage ansible.cfg.
+Role to install Ansible from git clone.
 By default no variables required.
 
 
@@ -14,8 +14,6 @@ defaults/main.yml
 ansible_inst:
  dir: /opt/ansible
  add_evn_setup_hack_sys_wide: True
-
-ansible_cfg: ansible.cfg.j2
 ```
 
 
@@ -40,4 +38,4 @@ Author Information
 
 Tal Lannder
 
-tallannder@gmail.com
+tal@pjili.com

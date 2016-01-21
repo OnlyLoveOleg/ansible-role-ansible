@@ -1,6 +1,6 @@
 ---
 - name: Debian | install packages
-  apt: >
+  apt:
    name={{item}}
    state=latest
    update_cache=yes
@@ -11,11 +11,11 @@
    - build-essential
 
 - name: Debian | easy_install - Install pip
-  easy_install: >
+  easy_install:
    name=pip
 
 - name: Debian | pip - Install Packages
-  pip: >
+  pip:
    name={{item}}
    state=latest
   with_items:
@@ -28,7 +28,7 @@
    - redis
 
 - name: Debian | Clone Ansible from github.com
-  git: >
+  git:
    repo=https://github.com/ansible/ansible.git
    recursive=yes
    dest={{ansible_inst.dir}}
@@ -36,18 +36,10 @@
    update=no
 
 - name: Debian | Add Ansible env-setup hack system wide
-  template: >
+  template:
    src=ansible-env-setup.j2
    dest=/etc/profile.d/ansible-env-setup.sh
-   owner=root group=root mode=0755
+   owner=root
+   group=root
+   mode=0755
   when: ansible_inst.add_evn_setup_hack_sys_wide
-
-- name: Debian | make sure /etc/ansible exist
-  file: >
-   path=/etc/ansible
-   state=directory
-
-- name: Debian | Copy ansible.cfg configuration file
-  template: >
-   src={{ ansible_cfg }}
-   dest=/etc/ansible/ansible.cfg
