@@ -8,6 +8,10 @@
    - gcc
    - python-setuptools
    - python-devel
+   - libffi
+   - libffi-devel
+   - openssl-devel
+
 
 - name: RedHat | easy_install - Install pip
   easy_install:
