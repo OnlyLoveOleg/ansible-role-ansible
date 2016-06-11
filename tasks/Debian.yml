@@ -1,7 +1,7 @@
 ---
 - name: Debian | install packages
   apt:
-   name: {{item}}
+   name: "{{ item }}"
    state: latest
    update_cache: yes
   with_items:
@@ -20,7 +20,7 @@
 
 - name: Debian | pip - Install Packages
   pip:
-   name: {{item}}
+   name: "{{ item }}"
    state: latest
   with_items:
    - paramiko
@@ -38,7 +38,7 @@
   git:
    repo: https://github.com/ansible/ansible.git
    recursive: yes
-   dest: {{ansible_inst.dir}}
+   dest: "{{ ansible_inst.dir }}"
    accept_hostkey: yes
    update: no
 
