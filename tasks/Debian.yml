@@ -54,7 +54,7 @@
 
 
 - name: Debian | copy ansible_update.sh to remote
-  file:
+  copy:
     src: ansible_update.sh
     dest: "{{ansible_inst.dir}}/ansible_update.sh"
     owner: root
