@@ -1,5 +1,5 @@
 ---
-- name: Debian | install packages
+- name: Ubuntu-14 | install packages
   apt:
    name: "{{ item }}"
    state: latest
@@ -13,12 +13,12 @@
    - libssl-dev
 
 
-- name: Debian | easy_install - Install pip
+- name: Ubuntu-14 | easy_install - Install pip
   easy_install:
    name: pip
 
 
-- name: Debian | pip - Install Packages
+- name: Ubuntu-14 | pip - Install Packages
   pip:
    name: "{{ item }}"
    state: latest
@@ -34,7 +34,7 @@
    - pycrypto
 
 
-- name: Debian | Clone Ansible from github.com
+- name: Ubuntu-14 | Clone Ansible from github.com
   git:
    repo: https://github.com/ansible/ansible.git
    recursive: yes
@@ -43,7 +43,7 @@
    update: no
 
 
-- name: Debian | Add Ansible env-setup hack system wide
+- name: Ubuntu-14 | Add Ansible env-setup hack system wide
   template:
    src: ansible-env-setup.j2
    dest: /etc/profile.d/ansible-env-setup.sh
@@ -53,7 +53,7 @@
   when: ansible_inst.add_evn_setup_hack_sys_wide
 
 
-- name: Debian | copy ansible_update.sh to remote
+- name: Ubuntu-14 | copy ansible_update.sh to remote
   copy:
     src: ansible_update.sh
     dest: "{{ansible_inst.dir}}/ansible_update.sh"

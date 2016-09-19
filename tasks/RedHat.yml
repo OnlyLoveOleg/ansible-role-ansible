@@ -1,4 +1,6 @@
 ---
+# ToDo: check on supported system and update the file.
+
 - name: RedHat | install packages
   yum:
    name={{item}}

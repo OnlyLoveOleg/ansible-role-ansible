@@ -1,23 +1,9 @@
 ---
-# ansible_distribution_release variable
-#
-# CenOS 7     - Core
-# RedHat 6    - Santiago
-# RedHat 7    - Maipo
-# Ubuntu 14   - trusty
-- name: Check for supported operating system on target
+- name: check for supported operating system on target
   fail:
     msg: "The operating system of the target machine ({{ inventory_hostname }}) is not currently supported."
-  when: ansible_distribution_release not in ['trusty']
+  when: ( ansible_distribution == "Ubuntu" and ansible_distribution_major_version not in ['14', '16'] )
 
-- name: Include Debian specific tasks
-  include: Debian.yml
-  when: ansible_os_family == 'Debian'
 
-#- name: Include RedHat specific tasks
-#  include: RedHat.yml
-#  when: ansible_os_family == 'RedHat'
-#
-#- name: Include Suse specific tasks
-#  include: Suse.yml
-#  when: ansible_os_family == 'Suse'
+- name: include distro specific tasks
+  include: "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
